@@ -1,0 +1,170 @@
+import golosinas.*
+
+describe "Parte 1: Tests de valores iniciales de las golosinas"{
+  test "Los valores iniciales del bombón son: precio de 5, peso de 15, sabor frutilla y libre de gluten"{
+    assert.equals(bombon.peso(), 15)
+    assert.equals(bombon.precio(), 5)
+    assert.equals(bombon.sabor(), "frutilla")
+    assert.that(bombon.esLibreDeGluten())
+  }
+  test "Los valores iniciales del alfajor son: precio de 12, peso de 300, sabor chocolate y no es libre de gluten" {
+    assert.equals(alfajor.precio(), 12)
+    assert.equals(alfajor.peso(), 300)
+    assert.equals(alfajor.sabor(), "chocolate")
+    assert.notThat(alfajor.esLibreDeGluten())
+  }
+  test "Los valores iniciales del caramelo son: precio de 1, peso de 5, sabor frutilla y es libre de gluten" {
+    assert.equals(caramelo.precio(), 1)
+    assert.equals(caramelo.peso(), 5)
+    assert.equals(caramelo.sabor(), "frutilla")
+    assert.that(caramelo.esLibreDeGluten())
+  }
+  test "Los valores iniciales de la oblea son: precio de 5, peso de 250, sabor vainilla y no es libre de gluten" {
+    assert.equals(oblea.precio(), 5)
+    assert.equals(oblea.peso(), 250)
+    assert.equals(oblea.sabor(), "vainilla")
+    assert.notThat(oblea.esLibreDeGluten())
+  }
+  test "Los valores iniciales del chupetín son: precio de 2, peso de 7, sabor naranja y es libre de gluten"{
+    assert.equals(chupetin.precio(), 2)
+    assert.equals(chupetin.peso(), 7)
+    assert.equals(chupetin.sabor(), "naranja")
+    assert.that(chupetin.esLibreDeGluten())
+    
+  }
+  test "Los valores iniciales del chocolatin son: precio de 20 para un peso asignado inicialmente en 40, sabor chocolate y no es libre de gluten"{
+    chocolatin.asignarPesoInicial(40)
+    assert.equals(chocolatin.peso(), 40)
+    assert.equals(chocolatin.precio(), 20)
+    assert.equals(chocolatin.sabor(), "chocolate")
+    assert.notThat(chocolatin.esLibreDeGluten())
+  }
+  test "Los valores iniciales del chocolatin son: precio de 50 para un peso asignado inicialmente en 100, sabor chocolate y no es libre de gluten"{
+    chocolatin.asignarPesoInicial(100)
+    assert.equals(chocolatin.peso(), 100)
+    assert.equals(chocolatin.precio(), 50)
+    assert.equals(chocolatin.sabor(), "chocolate")
+    assert.notThat(chocolatin.esLibreDeGluten())
+  }
+
+  test "Los valores iniciales para una pastilla tutti-frutti libre de gluten son: peso de 5, precio de 7 y sabor frutilla"{
+    pastillaTuttiFrutti.quitarGluten()
+    assert.equals(pastillaTuttiFrutti.peso(), 5)
+    assert.equals(pastillaTuttiFrutti.precio(), 7)
+    assert.equals(pastillaTuttiFrutti.sabor(), "chocolate")
+  }
+  test "Los valores iniciales para una pastilla tutti-frutti no libre de gluten son: peso de 5, precio de 10 y sabor frutilla"{
+    pastillaTuttiFrutti.añadirGluten()
+    assert.equals(pastillaTuttiFrutti.peso(), 5)
+    assert.equals(pastillaTuttiFrutti.precio(), 10)
+    assert.equals(pastillaTuttiFrutti.sabor(), "chocolate")
+  }
+}
+
+describe "Parte 1: Tests de valores post mordiscos en las golosinas"{
+  test "Al recibir dos mordiscos, el peso del bombón pasa a ser 7.8"{
+    bombon.recibirMordisco()
+    bombon.recibirMordisco()
+    assert.equals(bombon.peso(), 7.8)
+  }
+  test "Al recibir dos mordiscos, el peso del alfajor pasa a ser: 192"{
+    alfajor.recibirMordisco()
+    alfajor.recibirMordisco()
+    assert.equals(alfajor.peso(), 192)
+  }
+  test "Al recibir dos mordiscos, el peso del caramelo pasa a ser: 3"{
+    caramelo.recibirMordisco()
+    caramelo.recibirMordisco()
+    assert.equals(caramelo.peso(), 3)
+  }
+  test "Al recibir dos mordiscos, el peso del chupetin pasa a ser: 5.67."{
+    chupetin.recibirMordisco()
+    chupetin.recibirMordisco()
+    assert.equals(chupetin.peso(), 5.67)
+  }
+  test "Al recibir tres mordiscos, el peso de la oblea pasa a ser: 15.625" {
+    oblea.recibirMordisco()
+    oblea.recibirMordisco()
+    oblea.recibirMordisco()
+    assert.equals(oblea.peso(), 15.625)
+  }
+  test "Al recibir dos mordiscos y con un peso inicial asignado en 40, el peso del chocolatin pasa a ser: 36"{
+    chocolatin.asignarPesoInicial(40)
+    chocolatin.recibirMordisco()
+    chocolatin.recibirMordisco()
+    assert.equals(chocolatin.peso(), 36)
+  }
+  test "Al recibir dos mordiscos y con un peso inicial asignado en 100, el peso del chocolatin pasa a ser: 96"{
+    chocolatin.asignarPesoInicial(100)
+    chocolatin.recibirMordisco()
+    chocolatin.recibirMordisco()
+    assert.equals(chocolatin.peso(), 96)
+  }
+  test "Al recibir dos mordiscos, una pastilla tutti-frutti libre de gluten con sabor inicial en chocolate, pasa a ser de frutilla"{
+    pastillaTuttiFrutti.quitarGluten()
+    pastillaTuttiFrutti.recibirMordisco()
+    pastillaTuttiFrutti.recibirMordisco()
+    assert.equals(pastillaTuttiFrutti.sabor(), "frutilla")
+  }
+  test "Al recibir dos mordiscos, una pastilla tutti-frutti no libre de gluten con sabor inicial en chocolate, pasa a ser de frutilla"{
+    pastillaTuttiFrutti.añadirGluten()
+    pastillaTuttiFrutti.recibirMordisco()
+    pastillaTuttiFrutti.recibirMordisco()
+    assert.equals(pastillaTuttiFrutti.sabor(), "frutilla")
+  }
+}
+
+describe "Parte 1: Tests de la golosina bañada"{
+  test "Al bañar una pastilla tutti-frutti libre de gluten y de chocolate, sus valores iniciales son: precio de 9, peso de 9"{
+    pastillaTuttiFrutti.quitarGluten()
+    golosinaBañada.cambiarGolosinaBase(pastillaTuttiFrutti)
+    assert.equals(golosinaBañada.precio(), 9)
+    assert.equals(golosinaBañada.peso(), 9)
+  }
+  test "Al recibir dos mordiscos, una pastilla tutti-frutti de chocolate bañada, su peso pasa a ser de 5 y su sabor pasa a ser de frutilla"{
+    pastillaTuttiFrutti.quitarGluten()
+    golosinaBañada.cambiarGolosinaBase(pastillaTuttiFrutti)
+    golosinaBañada.recibirMordisco()
+    golosinaBañada.recibirMordisco()
+    assert.equals(golosinaBañada.peso(), 5)
+    assert.equals(golosinaBañada.sabor(), "frutilla")
+  }
+  test "Al bañar un chocolatín de 40 gramos, sus valores iniciales son: precio de 22, peso de 44"{
+    chocolatin.asignarPesoInicial(40)
+    golosinaBañada.cambiarGolosinaBase(chocolatin)
+    assert.equals(golosinaBañada.precio(), 22)
+    assert.equals(golosinaBañada.peso(), 44)
+  }
+  test "Al recibir dos mordiscos, un chocolatín de 40 gramos y bañado, su peso pasa a ser de 36"{
+    chocolatin.asignarPesoInicial(40)
+    golosinaBañada.cambiarGolosinaBase(chocolatin)
+    golosinaBañada.recibirMordisco()
+    golosinaBañada.recibirMordisco()
+    assert.equals(golosinaBañada.peso(), 36)
+  }
+  test "Al bañar un chocolatín de 100 gramos, sus valores iniciales son: precio de 52, peso de 104"{
+    chocolatin.asignarPesoInicial(100)
+    golosinaBañada.cambiarGolosinaBase(chocolatin)
+    assert.equals(golosinaBañada.precio(), 52)
+    assert.equals(golosinaBañada.peso(), 104)
+  }
+  test "Al recibir dos mordiscos, un chocolatín de 100 gramos y bañado, su peso pasa a ser de 96"{
+    chocolatin.asignarPesoInicial(100)
+    golosinaBañada.cambiarGolosinaBase(chocolatin)
+    golosinaBañada.recibirMordisco()
+    golosinaBañada.recibirMordisco()
+    assert.equals(golosinaBañada.peso(), 96)
+  }
+  test "Al bañar un chupetín su precio es de 4, y su peso es de 11"{
+    golosinaBañada.cambiarGolosinaBase(chupetin)
+    assert.equals(golosinaBañada.precio(), 4)
+    assert.equals(golosinaBañada.peso(), 11)
+  }
+  test "Al recibir dos mordiscos, un chupetín bañado pasa a tener un peso de 5.67"{
+    golosinaBañada.cambiarGolosinaBase(chupetin)
+    golosinaBañada.recibirMordisco()
+    golosinaBañada.recibirMordisco()
+    assert.equals(golosinaBañada.peso(), 5.67)
+  }
+
+}
