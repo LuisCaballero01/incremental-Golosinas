@@ -79,7 +79,7 @@ object chocolatin{ // TODO
     var peso = 0
 
     method esLibreDeGluten() = false
-    method precio() = 0.5*peso
+    method precio() = 0.5*pesoInicial
     method sabor() = sabor
     method peso() = peso
 
@@ -87,7 +87,9 @@ object chocolatin{ // TODO
         pesoInicial = unPeso
         peso = pesoInicial // O también unPeso
     }
-    method recibirMordisco(){}
+    method recibirMordisco(){
+        peso = 0.max(peso - 2)
+    }
 }
 
 object golosinaBañada{
